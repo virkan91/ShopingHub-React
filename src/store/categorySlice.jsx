@@ -46,5 +46,39 @@ export const {
 export default categorySlice.reducer;
 
 export const fetchCategories = () => {
-    return async function fetch
-}
+  return async function fetchCategoryThink(dispatch) {
+    dispatch(setStatus(STATUS.LOADING));
+    try {
+      const response = await fetch(`${BASE_URL}categories`);
+      const data = await response.json();
+      dispatch(setCategories(data.slice(0, 5)));
+      dispatch(setStatus(STATUS.IDLE));
+    } catch (error) {
+      dispatch(setStatus(STATUS.ERROR));
+    }
+  };
+};
+export const fetchProductsByCategory = (categoryID, dataType) => {
+  return async function fetchCategoryProductThink(dispatch) {
+    if (dataType === "all") dispatch(setCategoriesStatusAll(STATUS.LOADING));
+    if (dataType === "single")
+      dispatch(setCategoriesStatusSingle(STATUS.LOADING));
+
+    try {
+      const response = await fetch(
+        `${BASE_URL}categories/${categoryID}/product`
+      );
+      const data = await response.json();
+      if (dataType === "all") {
+        dispatch(setCategoriesProductAll(data.slice(0, 10)));
+        dispatch(setCategoriesStatusAll(STATUS.IDLE));
+      }
+      if (dataType === "single") {
+        dispatch(setCategoriesProductSingle(data.slice(0, 20)));
+        dispatch(setCategoriesProductSingle(STATUS.IDLE));
+      }
+    } catch (error) {
+      dispatch(setCategoriesStatusAll(STATUS.ERROR));
+    }
+  };
+};
