@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
     <nav className="navbar">
       <div className="navbar-content">
@@ -26,7 +27,8 @@ const Navbar = () => {
                   <i className="fas fa-shopping-cart"></i>
                 </span>
                 <div className="btn-txt fw-5">
-                  cart <span className="cart-count-value"></span>{" "}
+                  Cart
+                  <span className="cart-count-value">0</span>{" "}
                 </div>
               </Link>
             </div>
@@ -35,14 +37,29 @@ const Navbar = () => {
 
         <div className="navbar-bottom bg-regal-blue">
           <div className="container flex flex-between">
-            <ul className="nav-links flex">
-              <button type="button" className="navbar-hide-btn text-white">
-                <i className="fac fa-time"></i>
+            <ul
+              className={`nav-links flex ${
+                isSidebarOpen ? "show-nav-links" : ""
+              }`}
+            >
+              <button type="button" className="navbar-hide-btn text-white"
+                onClick={() => setIsSidebarOpen(false)}
+              >
+                <i className="fas fa-times"></i>
               </button>
               <li>
-                <Link to="/" className="nav-link text-white">Demo</Link>
+                <Link to="/" className="nav-link text-white">
+                  Demos
+                </Link>
               </li>
             </ul>
+            <button
+              type="botton"
+              className="navbar-show-btn text-gold"
+              onClick={() => setIsSidebarOpen(true)}
+            >
+              <i className="fas fa-bars"></i>
+            </button>
           </div>
         </div>
       </div>
