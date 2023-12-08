@@ -6,7 +6,7 @@ import Loader from "../Loader/Loader";
 import { STATUS } from "../../utils/status";
 import { formatPrice } from "../../utils/helpers";
 import "./SingleCategory.scss";
-import { setIsmodalVisible, setModalData } from "../../store/modalSlice";
+import { setIsModalVisible, setModalData } from "../../store/modalSlice";
 
 const SingleCategory = ({ products, status }) => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const SingleCategory = ({ products, status }) => {
   const viewModalHandler = (data) => {
     console.log(data);
     dispatch(setModalData(data));
-    dispatch(setIsmodalVisible(true))
+    dispatch(setIsModalVisible(true))
   }
 
 

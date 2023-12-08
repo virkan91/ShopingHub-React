@@ -10,11 +10,11 @@ const modalSlice = createSlice({
         setModalData(state, action) {
             state.data = action.payload
         },
-        setIsmodalVisible(state, action) {
+        setIsModalVisible(state, action) {
             state.isModalVisible = action.payload
         }
     }
 });
 
-export const { setModalData, setIsmodalVisible } = modalSlice.actions
+export const { setModalData, setIsModalVisible } = modalSlice.actions
 export default modalSlice.reducer;
