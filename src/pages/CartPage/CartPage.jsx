@@ -1,9 +1,74 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import "./CartPage.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { removeFromCart, getCartTotal, clearCart } from "../../store/cartSlice";
+
+import { formatPrice } from "../../utils/helpers";
 
 const CartPage = () => {
-  return (
-    <div>CartPage</div>
-  )
-}
+  const dispatch = useDispatch();
+  const {
+    data: cartProducts,
+    totalItems,
+    totalAmount,
+    deliveryCharge,
+  } = useSelector((state) => state.cart);
 
-export default CartPage
+  const emptyCartMsg = <h4 className="text-red fw-6">No items found!</h4>;
+
+  useEffect(() => {
+    dispatch(getCartTotal());
+  }, [useSelector((state) => state.cart)]);
+  return (
+    <div className="cart-page">
+      <div className="container">
+        <div className="breadcrumb">
+          <ul className="breadcrumb-items flex">
+            <li className="breadcrumb-item">
+              <Link to="/">
+                <i className="fas fa-home"></i>
+                <span className="breadcrumb-separator">
+                  <i className="fas fa-chevron-right"></i>
+                </span>
+              </Link>
+            </li>
+            <li>Cart</li>
+          </ul>
+        </div>
+      </div>
+      <div className="bg-ghost-white py-5">
+        <div className="container">
+          <div className="section-title bg-ghost-white">
+            <h3 className="text-uppercase fw-7 text-regal-blue ls-1">
+              My Cart
+            </h3>
+          </div>
+          {cartProducts.length === 0 ? (
+            emptyCartMsg
+          ) : (
+            <div className="cart-content grid">
+              <div className="cart-left">
+                  <div className="cart-item grid">
+                    {
+                      cartProducts.map(cartProduct => (
+                        <div className="cart-item grid" key={cartProducts.id}>
+                          <div className="cart-item-img flex flex-column bg-white">
+                            <img src={cartProduct.images[0]}
+                              alt={cartProduct.title} />
+                          </div>
+                        </div>
+
+                      ))
+                    }
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CartPage;
