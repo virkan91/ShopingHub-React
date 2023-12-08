@@ -1,4 +1,4 @@
-import React, { isValidElement } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SingleProduct from "../SingleProduct/SingleProduct";
 import Error from "../Error/Error";
