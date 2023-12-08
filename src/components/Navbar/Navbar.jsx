@@ -3,15 +3,18 @@ import "./Navbar.scss";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCategories } from "../../store/categorySlice";
+import { getCartTotal } from "../../store/cartSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const { data: categories } = useSelector((state) => state.category);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const {totalItems} = useSelector((state) => state.cart )
 
   // useEffect
   useEffect(() => {
     dispatch(fetchCategories());
+    dispatch(getCartTotal())
   }, []);
   return (
     <nav className="navbar">
@@ -37,7 +40,7 @@ const Navbar = () => {
                 </span>
                 <div className="btn-txt fw-5">
                   Cart
-                  <span className="cart-count-value">0</span>{" "}
+                  <span className="cart-count-value">{totalItems}</span>{" "}
                 </div>
               </Link>
             </div>
