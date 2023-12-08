@@ -8,18 +8,14 @@ import { formatPrice } from "../../utils/helpers";
 
 const CartPage = () => {
   const dispatch = useDispatch();
-  const {
-    data: cartProducts,
-    totalItems,
-    totalAmount,
-    deliveryCharge,
-  } = useSelector((state) => state.cart);
+  const {data: cartProducts, totalItems, totalAmount, deliveryCharge} = useSelector((state) => state.cart);
 
-  const emptyCartMsg = <h4 className="text-red fw-6">No items found!</h4>;
 
   useEffect(() => {
     dispatch(getCartTotal());
   }, [useSelector((state) => state.cart)]);
+
+  const emptyCartMsg = <h4 className="text-red fw-6">No items found!</h4>
   return (
     <div className="cart-page">
       <div className="container">
@@ -44,18 +40,30 @@ const CartPage = () => {
               My Cart
             </h3>
           </div>
-          {cartProducts.length === 0 ? (
-            emptyCartMsg
-          ) : (
+          {
+            cartProducts.length === 0 ? emptyCartMsg : (
             <div className="cart-content grid">
               <div className="cart-left">
                   <div className="cart-item grid">
                     {
                       cartProducts.map(cartProduct => (
-                        <div className="cart-item grid" key={cartProducts.id}>
+                        <div className="cart-item grid" key={cartProduct.id}>
                           <div className="cart-item-img flex flex-column bg-white">
-                            <img src={cartProduct.images[0]}
-                              alt={cartProduct.title} />
+                            <img src={cartProduct.images[0]} alt={cartProduct.title} />
+                            <button type="button" className="btn-square rmv-form-cart-btn">
+                              <span className="btn-square-icon">
+                                <i className="fas fa-trash"></i>
+                              </span>
+                            </button>
+                          </div>
+                          <div className="cart-item-info">
+                            <h6 className="fs-16 tw-5 text-light-blue">
+                              {cartProduct.title}
+                            </h6>
+                            <div className="qty flex">
+                              <span className="text-light-blue qty-text">Qty:</span>
+                            </div>
+                            
                           </div>
                         </div>
 
