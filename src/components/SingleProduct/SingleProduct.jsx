@@ -35,7 +35,7 @@ const SingleProduct = () => {
     const tempProduct = {
       ...product,
       quantity: qty,
-      totalPrice,
+      totalPrice
     };
     dispatch(addToCart(tempProduct));
     dispatch(setIsModalVisible(false));
