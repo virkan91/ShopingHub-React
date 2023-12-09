@@ -59,7 +59,30 @@ const cartSlice = createSlice({
                 return cartTotal += cartItem.totalPrice;
             }, 0);
             state.totalItems = state.data.length;
+        },
+        toggleCartQty(state, action) {
+            const tempCart = state.data.map(item => {
+                if (item.id === action.payload.id) {
+                    let tempQty = item.quantity;
+                    let tempTotalPrice = item.totalPrice;
+                    if (action.payload.type === "INC") {
+                        tempQty++;
+                        tempTotalPrice = tempQty * item.price;
+                    }
+                    if (action.payload.type === "DEC") {
+                        tempQty--;
+                        if (tempQty < 1) tempQty = 1;
+                        tempTotalPrice = tempQty * item.price;
+                    }
+                    return { ...item, quantity: tempQty, totalPrice: tempTotalPrice};
+                } else {
+                    return item;
+                }
+            });
+            state.data = tempCart;
+            storeInLocalStorage(state.data)
         }
+
     }
 });
 
