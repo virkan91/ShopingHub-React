@@ -157,20 +157,22 @@ const CartPage = () => {
                       <span className="fw-4">Discount</span>
                       <span className="fw-7">
                         <span className="fw-5 text-red">-&nbsp;</span>
-                        
+                        {formatPrice(0)}
                       </span>
                     </li>
                     <li className="flex flex-between">
                       <span className="fw-4">Delivery Cost</span>
                       <span className="fw-7">
                         <span className="fw-5 text-gold">+&nbsp;</span>
-                        
+                        {formatPrice(deliveryCharge)}
                       </span>
                     </li>
                   </ul>
                   <div className="cart-summary-total flex flex-between fs-18">
                     <span className="fw-6">Grand Total: </span>
-                    <span className="fw-6"></span>
+                    <span className="fw-6">
+                      {formatPrice(totalAmount + deliveryCharge)}
+                    </span>
                   </div>
                   <div className="cart-summary-btn">
                     <button type="button" className="btn-secondary">
