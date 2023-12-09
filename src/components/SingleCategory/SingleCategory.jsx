@@ -31,7 +31,7 @@ const SingleCategory = ({ products, status }) => {
             </h3>
           </div>
           <div className="product-items grid">
-            {products.map((product) => (
+            {products.map(product => (
               <div
                 className="product-item bg-white"
                 key={product.id}
