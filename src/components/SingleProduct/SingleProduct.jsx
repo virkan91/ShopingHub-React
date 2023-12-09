@@ -36,7 +36,8 @@ const SingleProduct = () => {
       ...product,
       quantity: qty,
       totalPrice
-    };
+    }
+    
     dispatch(addToCart(tempProduct));
     dispatch(setIsModalVisible(false));
     navigate("/cart");
