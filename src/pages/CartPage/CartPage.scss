@@ -1,0 +1,30 @@
+@import "../../App.scss";
+
+.cart-page{
+    min-height: 50vh;
+
+}
+.qty{
+    margin: 12px 0 6px;
+    &-text{
+        margin-right: 10px;
+    }
+    &-change{
+        .qty-inc, .qty-dec{
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            width: 32px;
+            height: 32px;
+            transition: $transition;
+
+
+            &:hover{
+                border: 1px solid rgba(0, 0, 0, 0.3);
+            }
+
+        }
+
+        .qty-value{
+            width: 40px;
+        }
+    }
+}
